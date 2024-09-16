@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WUTHERING WAVES DECIPHERER</title>
+    <style>
+        .cipher-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .cipher-panel {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 600px;
+            justify-content: center;
+        }
+
+        .cipher-button {
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .cipher-button img {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+
+        #output {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        #uploaded-image {
+            max-width: 400px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+
+        .upload-container {
+            margin-bottom: 20px;
+        }
+
+        .upload-container input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .upload-container button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cipher-wrapper">
+
+    <div class="upload-container">
+        <input type="file" id="image-input" accept="image/*">
+        <button id="clear-image">Clear Image</button>
+        <img id="uploaded-image" alt="Uploaded Image Preview">
+    </div>
+
+    <div class="cipher-panel">
+        <div class="cipher-button" data-letter="A">
+            <img src="images/A.png" alt="Cipher A">
+        </div>
+        <div class="cipher-button" data-letter="B">
+            <img src="images/B.png" alt="Cipher B">
+        </div>
+        <div class="cipher-button" data-letter="C">
+            <img src="images/C.png" alt="Cipher C">
+        </div>
+        <div class="cipher-button" data-letter="D">
+            <img src="images/D.png" alt="Cipher D">
+        </div>
+        <div class="cipher-button" data-letter="E">
+            <img src="images/E.png" alt="Cipher E">
+        </div>
+        <div class="cipher-button" data-letter="F">
+            <img src="images/F.png" alt="Cipher F">
+        </div>
+        <div class="cipher-button" data-letter="G">
+            <img src="images/G.png" alt="Cipher G">
+        </div>
+        <div class="cipher-button" data-letter="H">
+            <img src="images/H.png" alt="Cipher H">
+        </div>
+        <div class="cipher-button" data-letter="I">
+            <img src="images/I.png" alt="Cipher I">
+        </div>
+    </div>
+
+    <div class="cipher-panel">
+        <div class="cipher-button" data-letter="J">
+            <img src="images/J.png" alt="Cipher J">
+        </div>
+        <div class="cipher-button" data-letter="K">
+            <img src="images/K.png" alt="Cipher K">
+        </div>
+        <div class="cipher-button" data-letter="L">
+            <img src="images/L.png" alt="Cipher L">
+        </div>
+        <div class="cipher-button" data-letter="M">
+            <img src="images/M.png" alt="Cipher M">
+        </div>
+        <div class="cipher-button" data-letter="N">
+            <img src="images/N.png" alt="Cipher N">
+        </div>
+        <div class="cipher-button" data-letter="O">
+            <img src="images/O.png" alt="Cipher O">
+        </div>
+        <div class="cipher-button" data-letter="P">
+            <img src="images/P.png" alt="Cipher P">
+        </div>
+        <div class="cipher-button" data-letter="Q">
+            <img src="images/Q.png" alt="Cipher Q">
+        </div>
+        <div class="cipher-button" data-letter="R">
+            <img src="images/R.png" alt="Cipher R">
+        </div>
+    </div>
+
+    <div class="cipher-panel">
+        <div class="cipher-button" data-letter="S">
+            <img src="images/S.png" alt="Cipher S">
+        </div>
+        <div class="cipher-button" data-letter="T">
+            <img src="images/T.png" alt="Cipher T">
+        </div>
+        <div class="cipher-button" data-letter="U">
+            <img src="images/U.png" alt="Cipher U">
+        </div>
+        <div class="cipher-button" data-letter="V">
+            <img src="images/V.png" alt="Cipher V">
+        </div>
+        <div class="cipher-button" data-letter="W">
+            <img src="images/W.png" alt="Cipher W">
+        </div>
+        <div class="cipher-button" data-letter="X">
+            <img src="images/X.png" alt="Cipher X">
+        </div>
+        <div class="cipher-button" data-letter="Y">
+            <img src="images/Y.png" alt="Cipher Y">
+        </div>
+        <div class="cipher-button" data-letter="Z">
+            <img src="images/Z.png" alt="Cipher Z">
+        </div>
+    </div>
+
+    <input type="text" id="output" placeholder="Your decyphered text will appear here">
+</div>
+
+<script>
+    document.querySelectorAll('.cipher-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const letter = this.getAttribute('data-letter');
+            document.getElementById('output').value += letter;
+        });
+    });
+
+    const imageInput = document.getElementById('image-input');
+    const uploadedImage = document.getElementById('uploaded-image');
+    const clearImageButton = document.getElementById('clear-image');
+
+    imageInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImage.src = e.target.result;
+                uploadedImage.style.display = 'block'
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+
+    clearImageButton.addEventListener('click', function() {
+        uploadedImage.src = '';
+        uploadedImage.style.display = 'none';
+        imageInput.value = '';
+    });
+</script>
+
+</body>
+</html>
