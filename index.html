@@ -39,6 +39,8 @@
             padding: 10px;
             font-size: 18px;
             text-align: center;
+            resize: vertical;
+            overflow: auto;
         }
 
         #uploaded-image {
@@ -158,7 +160,8 @@
         </div>
     </div>
 
-    <input type="text" id="output" placeholder="Your decyphered text will appear here">
+    <textarea id="output" rows="3" placeholder="Your deciphered text will appear here"></textarea>
+    <button id="clear-text">Clear Text</button>
 </div>
 
 <script>
@@ -185,11 +188,15 @@
         }
     });
 
-
     clearImageButton.addEventListener('click', function() {
         uploadedImage.src = '';
         uploadedImage.style.display = 'none';
         imageInput.value = '';
+    });
+
+    const clearTextButton = document.getElementById('clear-text');
+    clearTextButton.addEventListener('click', function() {
+        document.getElementById('output').value = '';
     });
 </script>
 
